@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💕 Une question très importante 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #FFD6E0 0%, #FFAEC9 40%, #FFD1DC 70%, #FFC2D4 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Dancing Script', cursive;
+      overflow: hidden;
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(6px);
+      padding: 3.5rem 5rem;
+      border-radius: 40px;
+      border: 4px dashed #FF69B4;
+      box-shadow:
+        0 0 0 8px rgba(255, 182, 193, 0.3),
+        0 20px 60px rgba(255, 105, 180, 0.25),
+        inset 0 0 40px rgba(255, 255, 255, 0.4);
+      max-width: 90vw;
+    }
+
+    .emoji-row {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      animation: bounce 1.5s infinite alternate;
+      display: block;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: #C2185B;
+      text-shadow:
+        2px 2px 0 #FF80AB,
+        4px 4px 0 rgba(255, 105, 180, 0.25);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #E91E8C;
+      opacity: 0.8;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    .buttons-area {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.4rem;
+      padding: 0.9rem 2.8rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      user-select: none;
+    }
+
+    .btn-oui {
+      background: linear-gradient(135deg, #FF69B4 0%, #FF1493 50%, #E91E8C 100%);
+      color: white;
+      box-shadow:
+        0 6px 0 #C2185B,
+        0 8px 20px rgba(255, 20, 147, 0.4);
+      animation: pulse-oui 2s infinite;
+    }
+
+    @keyframes pulse-oui {
+      0%, 100% { box-shadow: 0 6px 0 #C2185B, 0 8px 20px rgba(255, 20, 147, 0.4); }
+      50%       { box-shadow: 0 6px 0 #C2185B, 0 8px 35px rgba(255, 20, 147, 0.7); }
+    }
+
+    .btn-oui:hover {
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 10px 0 #C2185B, 0 14px 35px rgba(255, 20, 147, 0.6);
+    }
+
+    .btn-oui:active {
+      transform: scale(1.05) translateY(2px);
+      box-shadow: 0 4px 0 #C2185B, 0 6px 15px rgba(255, 20, 147, 0.4);
+    }
+
+    .btn-non {
+      background: linear-gradient(135deg, #E0E0E0, #BDBDBD);
+      color: #888;
+      box-shadow: 0 4px 0 #9E9E9E, 0 6px 15px rgba(0,0,0,0.1);
+      transition: none;
+      z-index: 5;
+    }
+
+    .btn-non.escaped {
+      position: fixed;
+    }
+
+    /* ===== SUCCESS OVERLAY ===== */
+    #successOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 182, 193, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #successOverlay.visible { display: flex; }
+
+    #successOverlay h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      color: #C2185B;
+      text-shadow: 3px 3px 0 #FF80AB;
+      animation: zoomIn 0.5s ease-out;
+      margin-bottom: 1rem;
+    }
+
+    #successOverlay p {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: #E91E8C;
+      animation: zoomIn 0.5s ease-out 0.2s both;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.3); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    /* ===== POP-IN "DEAD" ===== */
+    #deadOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #deadOverlay.visible { display: flex; }
+
+    .dead-popin {
+      background: white;
+      border-radius: 30px;
+      border: 4px dashed #FF69B4;
+      padding: 3rem 4rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+      animation: zoomIn 0.3s ease-out;
+      max-width: 90vw;
+    }
+
+    .dead-popin h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: #C2185B;
+      text-shadow: 2px 2px 0 #FF80AB;
+      margin-bottom: 1.5rem;
+    }
+
+    .dead-popin button {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.1rem;
+      padding: 0.7rem 2.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #FF69B4, #FF1493);
+      color: white;
+      box-shadow: 0 4px 0 #C2185B, 0 6px 15px rgba(255, 20, 147, 0.3);
+    }
+
+    .dead-popin button:hover {
+      transform: scale(1.05);
+    }
+
+    /* ===== GLITTER SPARKLE ===== */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 10;
+      font-size: 1.2rem;
+      animation: sparkle-anim 0.8s ease-out forwards;
+    }
+
+    @keyframes sparkle-anim {
+      0%   { transform: scale(0) rotate(0deg);   opacity: 1; }
+      100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="heartsCanvas"></canvas>
+
+<div class="container">
+  <span class="emoji-row">💖 🌸 💕 🌸 💖</span>
+  <h1>Est-ce que tu voudrais<br>être ma petite amie ?</h1>
+  <p class="subtitle">~ réfléchis bien avant de répondre ~</p>
+
+  <div class="buttons-area">
+    <button class="btn btn-oui" id="btnOui" onclick="handleOui()">
+      ✨ Oui ✨
+    </button>
+    <button class="btn btn-non" id="btnNon">
+      Non...
+    </button>
+  </div>
+</div>
+
+<!-- POP-IN NON CLIQUÉ -->
+<div id="deadOverlay">
+  <div class="dead-popin">
+    <h3>Désolé c'est dead<br>on recommence 💀</h3>
+    <button onclick="resetPage()">OK...</button>
+  </div>
+</div>
+
+<!-- SUCCESS SCREEN -->
+<div id="successOverlay">
+  <h2>NON JURE ????? 🤯</h2>
+  <p>Oh la dingueriiiiiie je pensais pas hein ! 😱💕</p>
+</div>
+
+<script>
+  // ============================================================
+  //  CONFIGURATION TELEGRAM — remplace ces deux valeurs !
+  //  1. Crée un bot via @BotFather sur Telegram → copie le token
+  //  2. Envoie un message à ton bot, puis ouvre :
+  //     https://api.telegram.org/bot<TOKEN>/getUpdates
+  //     → récupère le "chat":{"id": ...} de ta copine
+  // ============================================================
+  const TELEGRAM_BOT_TOKEN = '8707000573:AAHc-wf1rfgtEvNiRnjBuIIiqcmvP7YsHA8';
+  const TELEGRAM_CHAT_ID   = '5288054257';
+  const TELEGRAM_MESSAGE   = '💕 ELLE A DIT OUI !!! 💕🎉🎊 Tu lui as posé LA question et elle a accepté !!!';
+  // ============================================================
+
+  // --- BOUTON NON : se sauve à la souris ---
+  const btnNon = document.getElementById('btnNon');
+  let escaped = false;
+
+  function randomPosition() {
+    const margin = 20;
+    const w = btnNon.offsetWidth  || 120;
+    const h = btnNon.offsetHeight || 55;
+    const x = margin + Math.random() * (window.innerWidth  - w - margin * 2);
+    const y = margin + Math.random() * (window.innerHeight - h - margin * 2);
+    return { x, y };
+  }
+
+  btnNon.addEventListener('mouseenter', () => {
+    if (!escaped) {
+      // Première fois : passe en fixed et s'échappe
+      escaped = true;
+      btnNon.classList.add('escaped');
+    }
+    const { x, y } = randomPosition();
+    btnNon.style.left = x + 'px';
+    btnNon.style.top  = y + 'px';
+    spawnSparkle(x + 30, y + 20, '💨');
+  });
+
+  // Si le clic est quand même attrapé → pop-in "dead"
+  btnNon.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('deadOverlay').classList.add('visible');
+  });
+
+  function resetPage() {
+    // Cache la pop-in, supprime le bouton Non, page repart propre
+    document.getElementById('deadOverlay').classList.remove('visible');
+    btnNon.remove();
+  }
+
+  // --- BOUTON OUI ---
+  async function handleOui() {
+    // Confettis de cœurs
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => {
+        spawnSparkle(
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight,
+          ['💖','💕','💗','🌸','✨','💝'][Math.floor(Math.random()*6)]
+        );
+      }, i * 80);
+    }
+
+    // Affiche l'overlay
+    document.getElementById('successOverlay').classList.add('visible');
+
+    // Envoie le message Telegram
+    try {
+      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: TELEGRAM_MESSAGE,
+          parse_mode: 'HTML'
+        })
+      });
+    } catch (err) {
+      console.warn('Telegram non joignable :', err);
+    }
+  }
+
+  // --- SPARKLES ---
+  function spawnSparkle(x, y, emoji) {
+    const el = document.createElement('div');
+    el.className = 'sparkle';
+    el.textContent = emoji;
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 900);
+  }
+
+  // --- CŒURS EN ARRIÈRE-PLAN ---
+  const canvas = document.getElementById('heartsCanvas');
+  const ctx    = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function drawHeart(cx, cy, r, color, alpha) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle   = color;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    // lobe gauche
+    ctx.bezierCurveTo(cx - r/2, cy - r * 0.8, cx - r, cy - r * 0.4, cx - r, cy);
+    ctx.bezierCurveTo(cx - r, cy + r * 0.5, cx, cy + r, cx, cy + r * 1.2);
+    // lobe droit
+    ctx.bezierCurveTo(cx, cy + r, cx + r, cy + r * 0.5, cx + r, cy);
+    ctx.bezierCurveTo(cx + r, cy - r * 0.4, cx + r/2, cy - r * 0.8, cx, cy);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  const COLORS = ['#FF69B4','#FF1493','#FFB6C1','#FF80AB','#F48FB1','#FCE4EC'];
+  const particles = Array.from({ length: 25 }, () => ({
+    x:     Math.random() * window.innerWidth,
+    y:     Math.random() * window.innerHeight + window.innerHeight,
+    r:     6 + Math.random() * 18,
+    speed: 0.4 + Math.random() * 0.9,
+    alpha: 0.15 + Math.random() * 0.4,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    sway:  (Math.random() - 0.5) * 0.5,
+    phase: Math.random() * Math.PI * 2
+  }));
+
+  let frame = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    frame++;
+    particles.forEach(p => {
+      p.y -= p.speed;
+      p.x += Math.sin(frame * 0.02 + p.phase) * p.sway;
+      if (p.y < -p.r * 3) {
+        p.y = canvas.height + p.r * 3;
+        p.x = Math.random() * canvas.width;
+      }
+      drawHeart(p.x, p.y, p.r, p.color, p.alpha);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>
+</body>
+</html>
