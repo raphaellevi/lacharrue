@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faire un Pont® – Eric Guedj</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f3c;
+    --navy-mid: #1a3358;
+    --navy-light: #2b4a7a;
+    --gold: #b8922a;
+    --gold-light: #d4aa4a;
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --text-dark: #0d1f3c;
+    --text-mid: #3a4a60;
+    --text-light: #6b7d96;
+    --rule: #c8b89a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a2e;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── PAGE WRAPPER ─── */
+  .page {
+    width: 794px;
+    min-height: 1123px;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ═══════════════════════════
+     PAGE 1 – ACCROCHE
+  ═══════════════════════════ */
+  .page-1 {
+    background: var(--navy);
+    color: var(--cream);
+  }
+
+  .p1-bridge-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(
+        -35deg,
+        transparent,
+        transparent 18px,
+        rgba(184,146,42,0.4) 18px,
+        rgba(184,146,42,0.4) 19px
+      );
+  }
+
+  .p1-arc {
+    position: absolute;
+    bottom: -60px;
+    left: -80px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,146,42,0.15);
+    pointer-events: none;
+  }
+  .p1-arc-2 {
+    position: absolute;
+    bottom: -120px;
+    left: -160px;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,146,42,0.08);
+    pointer-events: none;
+  }
+
+  .p1-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 52px 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .p1-logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    color: var(--cream);
+  }
+  .p1-logo-text span {
+    color: var(--gold-light);
+  }
+
+  .p1-rule-top {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184,146,42,0.4), transparent);
+    margin: 0 28px;
+  }
+
+  .p1-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .p1-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 52px 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .p1-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+
+  .p1-headline {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 58px;
+    line-height: 1.05;
+    font-weight: 700;
+    color: var(--cream);
+    max-width: 580px;
+    margin-bottom: 12px;
+  }
+  .p1-headline em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .p1-subhead {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 52px;
+    letter-spacing: 0.02em;
+  }
+
+  .p1-rule-h {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .p1-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.82);
+    max-width: 560px;
+    font-weight: 300;
+  }
+  .p1-intro strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  .p1-bottom {
+    padding: 40px 52px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .p1-bridge-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .bridge-svg {
+    opacity: 0.35;
+  }
+
+  .p1-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(184,146,42,0.08);
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .p1-quote-block {
+    max-width: 400px;
+  }
+
+  .p1-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.65;
+    color: rgba(245,240,232,0.55);
+    border-left: 2px solid var(--gold);
+    padding-left: 18px;
+  }
+
+  /* ═══════════════════════════
+     PAGE 2 – À QUI JE M'ADRESSE
+  ═══════════════════════════ */
+  .page-2 {
+    background: var(--warm-white);
+  }
+
+  .p2-header {
+    background: var(--navy-mid);
+    padding: 36px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .p2-logo-small {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+  }
+  .p2-logo-small span { color: var(--gold-light); }
+
+  .p2-page-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+
+  .p2-section-title {
+    padding: 52px 52px 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  .p2-section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+  .p2-section-title h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .p2-rule-v {
+    width: 1px;
+    height: 42px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .p2-intro-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    padding: 0 52px 48px;
+    max-width: 620px;
+  }
+
+  .p2-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    flex: 1;
+  }
+
+  .p2-col {
+    padding: 40px 44px 48px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p2-col-left {
+    background: var(--navy);
+    border-top: 3px solid var(--gold);
+  }
+
+  .p2-col-right {
+    background: var(--cream);
+    border-top: 3px solid var(--navy-light);
+  }
+
+  .p2-col-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .p2-col-left .p2-col-tag { color: var(--gold); }
+  .p2-col-right .p2-col-tag { color: var(--navy-light); }
+
+  .p2-col-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 28px;
+  }
+  .p2-col-left .p2-col-title { color: var(--cream); }
+  .p2-col-right .p2-col-title { color: var(--navy); }
+
+  .p2-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .p2-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .p2-col-left .p2-item { color: rgba(245,240,232,0.85); }
+  .p2-col-right .p2-item { color: var(--text-mid); }
+
+  .p2-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .p2-col-left .p2-bullet { background: var(--gold); }
+  .p2-col-right .p2-bullet { background: var(--navy-light); }
+
+  .p2-col-footer {
+    margin-top: 28px;
+    padding-top: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .p2-col-left .p2-col-footer {
+    border-top: 1px solid rgba(184,146,42,0.25);
+    color: rgba(245,240,232,0.5);
+  }
+  .p2-col-right .p2-col-footer {
+    border-top: 1px solid rgba(43,74,122,0.2);
+    color: var(--text-light);
+  }
+
+  /* ═══════════════════════════
+     PAGE 3 – OFFRES
+  ═══════════════════════════ */
+  .page-3 {
+    background: var(--warm-white);
+  }
+
+  .p3-header {
+    background: var(--cream);
+    border-bottom: 1px solid rgba(184,146,42,0.25);
+    padding: 36px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .p3-logo-small {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--navy);
+  }
+  .p3-logo-small span { color: var(--gold); }
+
+  .p3-page-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .p3-section-title {
+    padding: 44px 52px 36px;
+  }
+
+  .p3-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .p3-section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .p3-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 2px;
+    padding: 0 52px;
+    flex: 1;
+  }
+
+  .p3-card {
+    padding: 32px 36px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p3-card-main-left {
+    background: var(--navy);
+    grid-row: 1 / 3;
+  }
+
+  .p3-card-right-top {
+    background: var(--navy-mid);
+  }
+
+  .p3-card-right-bottom {
+    background: var(--cream);
+    border: 1px solid rgba(184,146,42,0.2);
+  }
+
+  .p3-card-accent {
+    width: 32px;
+    height: 3px;
+    margin-bottom: 20px;
+  }
+  .p3-card-main-left .p3-card-accent { background: var(--gold); }
+  .p3-card-right-top .p3-card-accent { background: var(--gold-light); }
+  .p3-card-right-bottom .p3-card-accent { background: var(--navy-light); }
+
+  .p3-card-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .p3-card-main-left .p3-card-num { color: var(--gold); }
+  .p3-card-right-top .p3-card-num { color: var(--gold-light); }
+  .p3-card-right-bottom .p3-card-num { color: var(--navy-light); }
+
+  .p3-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 18px;
+  }
+  .p3-card-main-left .p3-card-title { color: var(--cream); font-size: 27px; }
+  .p3-card-right-top .p3-card-title { color: var(--cream); }
+  .p3-card-right-bottom .p3-card-title { color: var(--navy); }
+
+  .p3-card-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15.5px;
+    line-height: 1.65;
+    flex: 1;
+  }
+  .p3-card-main-left .p3-card-body { color: rgba(245,240,232,0.8); }
+  .p3-card-right-top .p3-card-body { color: rgba(245,240,232,0.75); }
+  .p3-card-right-bottom .p3-card-body { color: var(--text-mid); }
+
+  .p3-card-meta {
+    margin-top: 22px;
+    padding-top: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+  }
+  .p3-card-main-left .p3-card-meta {
+    border-top: 1px solid rgba(184,146,42,0.2);
+    color: var(--gold);
+  }
+  .p3-card-right-top .p3-card-meta {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: rgba(245,240,232,0.5);
+  }
+  .p3-card-right-bottom .p3-card-meta {
+    border-top: 1px solid rgba(43,74,122,0.15);
+    color: var(--navy-light);
+  }
+
+  .p3-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 2px 52px 0;
+  }
+
+  .p3-mini-card {
+    background: var(--cream);
+    border: 1px solid rgba(184,146,42,0.18);
+    padding: 24px 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .p3-mini-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .p3-mini-icon svg { width: 13px; height: 13px; fill: var(--gold); }
+
+  .p3-mini-content {}
+
+  .p3-mini-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .p3-mini-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--text-mid);
+  }
+
+  .p3-footer-bar {
+    height: 6px;
+    background: linear-gradient(to right, var(--navy), var(--navy-mid), var(--gold));
+    margin-top: auto;
+  }
+
+  /* ═══════════════════════════
+     PAGE 4 – SINGULARITÉ + CTA
+  ═══════════════════════════ */
+  .page-4 {
+    background: var(--navy);
+    color: var(--cream);
+  }
+
+  .p4-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 80% 20%, rgba(184,146,42,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 10% 80%, rgba(43,74,122,0.5) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .p4-grid-lines {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(245,240,232,0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,240,232,0.6) 1px, transparent 1px);
+    background-size: 52px 52px;
+    pointer-events: none;
+  }
+
+  .p4-header {
+    padding: 36px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid rgba(184,146,42,0.15);
+  }
+
+  .p4-logo-small {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+  }
+  .p4-logo-small span { color: var(--gold-light); }
+
+  .p4-page-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .p4-body {
+    padding: 48px 52px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 52px;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  .p4-left {}
+
+  .p4-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .p4-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+  .p4-left h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .p4-legitimacy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .p4-leg-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .p4-leg-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(184,146,42,0.25);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 24px;
+  }
+
+  .p4-leg-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.8);
+  }
+  .p4-leg-text strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  .p4-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .p4-gains-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .p4-gains {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-left: 2px solid var(--gold);
+    padding-left: 22px;
+    margin-bottom: 8px;
+  }
+
+  .p4-gain {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: rgba(245,240,232,0.85);
+  }
+  .p4-gain strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  .p4-cta-block {
+    background: var(--gold);
+    padding: 28px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .p4-cta-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+
+  .p4-cta-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .p4-cta-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14.5px;
+    font-style: italic;
+    color: rgba(13,31,60,0.65);
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  .p4-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .p4-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(245,240,232,0.75);
+  }
+  .p4-contact-row .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .p4-contact-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .p4-footer {
+    padding: 28px 52px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(184,146,42,0.12);
+  }
+
+  .p4-footer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(245,240,232,0.35);
+    max-width: 400px;
+    line-height: 1.5;
+  }
+
+  .p4-footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.2);
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white; }
+    .page {
+      margin: 0;
+      page-break-after: always;
+      break-after: page;
+    }
+  }
+
+  @media screen and (max-width: 860px) {
+    .page { width: 100%; min-height: auto; }
+    .p2-columns, .p3-grid, .p4-body { grid-template-columns: 1fr; }
+    .p3-mini-grid { grid-template-columns: 1fr; }
+    .p3-card-main-left { grid-row: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     PAGE 1 – ACCROCHE & POSITIONNEMENT
+═══════════════════════════════════ -->
+<div class="page page-1">
+  <div class="p1-bridge-bg"></div>
+  <div class="p1-arc"></div>
+  <div class="p1-arc-2"></div>
+
+  <div class="p1-top-bar">
+    <div class="p1-logo-text">Faire un Pont<span>®</span></div>
+    <div class="p1-rule-top"></div>
+    <div class="p1-tag">Accompagnement de dirigeants</div>
+  </div>
+
+  <div class="p1-hero">
+    <div class="p1-eyebrow">Une nouvelle étape. La même exigence.</div>
+    <h1 class="p1-headline">
+      Dirigeant<br>
+      en <em>transformation</em><br>
+      ou en <em>crise</em>&nbsp;?
+    </h1>
+    <div class="p1-subhead">L'accompagnement qui sécurise la décision.</div>
+
+    <div class="p1-rule-h"></div>
+
+    <p class="p1-intro">
+      Pendant trente ans, j'ai travaillé aux côtés de dirigeants dans des contextes financiers exigeants&nbsp;: restructurations, transactions, passages de cap. J'ai vu ce qui fait la différence. Ce n'est pas seulement la stratégie. <strong>C'est la qualité du décideur au moment où ça compte.</strong><br><br>
+      C'est pour adresser ce levier — rarement traité, pourtant déterminant — que j'ai créé Faire un Pont®.
+    </p>
+  </div>
+
+  <div class="p1-bottom">
+    <div class="p1-quote-block">
+      <p class="p1-quote">
+        «&nbsp;Durant les négociations financières, il savait me soutenir à titre personnel ainsi que dans mon interaction avec mon environnement. Il m'a aidé à tenir bon.&nbsp;»
+      </p>
+    </div>
+
+    <svg class="bridge-svg" width="180" height="80" viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="60" x2="180" y2="60" stroke="#b8922a" stroke-width="1.5"/>
+      <path d="M20 60 Q90 10 160 60" stroke="#b8922a" stroke-width="1.5" fill="none"/>
+      <line x1="50" y1="60" x2="62" y2="28" stroke="#b8922a" stroke-width="0.8" stroke-dasharray="2 2"/>
+      <line x1="80" y1="60" x2="84" y2="16" stroke="#b8922a" stroke-width="0.8" stroke-dasharray="2 2"/>
+      <line x1="110" y1="60" x2="106" y2="16" stroke="#b8922a" stroke-width="0.8" stroke-dasharray="2 2"/>
+      <line x1="140" y1="60" x2="126" y2="28" stroke="#b8922a" stroke-width="0.8" stroke-dasharray="2 2"/>
+      <line x1="20" y1="60" x2="20" y2="75" stroke="#b8922a" stroke-width="1.5"/>
+      <line x1="160" y1="60" x2="160" y2="75" stroke="#b8922a" stroke-width="1.5"/>
+    </svg>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     PAGE 2 – À QUI JE M'ADRESSE
+═══════════════════════════════════ -->
+<div class="page page-2">
+  <div class="p2-header">
+    <div class="p2-logo-small">Faire un Pont<span>®</span></div>
+    <div class="p2-page-label">À qui je m'adresse</div>
+  </div>
+
+  <div class="p2-section-title">
+    <h2>Deux <em>situations</em>,<br>un même enjeu.</h2>
+    <div class="p2-rule-v"></div>
+  </div>
+
+  <p class="p2-intro-text">
+    La qualité de la décision n'est pas constante. Elle fluctue avec l'état du dirigeant. Sous pression, les arbitrages deviennent défensifs, la vision se raccourcit, la communication se rigidifie. Mon intervention porte précisément sur ce point.
+  </p>
+
+  <div class="p2-columns">
+    <div class="p2-col p2-col-left">
+      <div class="p2-col-tag">Bloc 1</div>
+      <h3 class="p2-col-title">Le dirigeant<br>en transformation</h3>
+      <ul class="p2-items">
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Prise de poste dans un contexte LBO ou build-up — nouvelle posture, nouveaux interlocuteurs, enjeux de légitimité</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Changement de cap stratégique — pivoter sans perdre ses équipes ni ses investisseurs</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Phase de croissance accélérée — tenir le rythme sans que la posture du dirigeant devienne le goulot d'étranglement</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Cession ou transmission — traverser une transaction tout en restant pleinement opérationnel</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Difficultés d'exécution liées à la posture — quand le problème vient moins de la stratégie que de celui qui doit la porter</span>
+        </li>
+      </ul>
+      <div class="p2-col-footer">
+        L'objectif n'est pas de changer le dirigeant. C'est de le clarifier — pour que ses décisions soient plus rapides, mieux assumées, et cohérentes dans la durée.
+      </div>
+    </div>
+
+    <div class="p2-col p2-col-right">
+      <div class="p2-col-tag">Bloc 2</div>
+      <h3 class="p2-col-title">Le dirigeant<br>en situation de crise</h3>
+      <ul class="p2-items">
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Tension financière sévère — procédure amiable, renégociation de dette, impasse avec les actionnaires</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Conflit d'associés ou de gouvernance — naviguer dans l'adversité sans perdre sa capacité de décision</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Pression extrême et surcharge cognitive — quand l'état du dirigeant commence à fragiliser l'organisation</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Période de négociation critique — maintenir sa stabilité face à des interlocuteurs qui testent votre résistance</span>
+        </li>
+        <li class="p2-item">
+          <div class="p2-bullet"></div>
+          <span>Sortie de crise — reconstruire l'élan après une phase d'épuisement ou de rupture</span>
+        </li>
+      </ul>
+      <div class="p2-col-footer">
+        En crise, la première ressource n'est pas financière. Elle est psychique. Stabiliser le dirigeant, c'est protéger la gouvernance — et la valeur.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     PAGE 3 – LES OFFRES
+═══════════════════════════════════ -->
+<div class="page page-3">
+  <div class="p3-header">
+    <div class="p3-logo-small">Faire un Pont<span>®</span></div>
+    <div class="p3-page-label">Les offres</div>
+  </div>
+
+  <div class="p3-section-title">
+    <div class="p3-eyebrow">Modalités d'accompagnement</div>
+    <h2>Une offre structurée,<br>calibrée à la situation.</h2>
+  </div>
+
+  <div class="p3-grid">
+    <!-- Grande carte gauche : Coaching de transformation -->
+    <div class="p3-card p3-card-main-left">
+      <div class="p3-card-accent"></div>
+      <div class="p3-card-num">Offre principale — 01</div>
+      <div class="p3-card-title">Coaching<br>de transformation</div>
+      <div class="p3-card-body">
+        Construire un pont entre l'identité du dirigeant, son rôle stratégique et les contraintes de son environnement. Un dirigeant transformé n'est pas un dirigeant changé&nbsp;: c'est un dirigeant <em>clarifié</em>.<br><br>
+        Résultats concrets&nbsp;: décisions plus rapides et mieux assumées, communication plus cohérente, posture de leadership stabilisée. Moins de bruit interne, plus de fluidité dans l'exécution.<br><br>
+        Format&nbsp;: objectifs définis avec le dirigeant et son board (investisseur, DG). 8 séances sur environ 6 mois. Point de clôture structuré.
+      </div>
+      <div class="p3-card-meta">
+        FORMAT · 8 séances · ~6 mois · Confidentiel
+      </div>
+    </div>
+
+    <!-- Carte droite haut : Coaching de crise -->
+    <div class="p3-card p3-card-right-top">
+      <div class="p3-card-accent"></div>
+      <div class="p3-card-num">Offre principale — 02</div>
+      <div class="p3-card-title">Coaching de crise</div>
+      <div class="p3-card-body">
+        Stabiliser le dirigeant pour protéger la gouvernance. Trois axes&nbsp;: <strong>stabilisation</strong> de la surcharge émotionnelle, <strong>clarification</strong> des enjeux, <strong>pilotage</strong> pour retrouver une posture de décision.<br><br>
+        Il ne s'agit pas de rassurer. Il s'agit de permettre au dirigeant de retrouver un centre — pendant la phase la plus critique.
+      </div>
+      <div class="p3-card-meta">
+        FORMAT · ~6 séances · Durée de la phase critique · Intervention rapide
+      </div>
+    </div>
+
+    <!-- Carte droite bas : Modules complémentaires -->
+    <div class="p3-card p3-card-right-bottom">
+      <div class="p3-card-accent"></div>
+      <div class="p3-card-num">Modules complémentaires</div>
+      <div class="p3-card-title">À la carte</div>
+      <div class="p3-card-body">
+        Selon les situations, deux modules peuvent s'intégrer en amont ou en complément&nbsp;:
+        <br><br>
+        <strong>Soutien ponctuel</strong>&nbsp;— séance unique avant une audience, une négociation difficile ou un conseil délicat. Régulation immédiate, clarification des enjeux, recentrage.
+        <br><br>
+        <strong>Coaching existentiel</strong>&nbsp;— pour le dirigeant qui n'est pas en crise mais en perte d'élan (sens, stimulation). Réaligner sens et action pour restaurer une dynamique durable.
+      </div>
+      <div class="p3-card-meta">
+        Séance ponctuelle à la demande · Peut être fusionné avec l'offre 01
+      </div>
+    </div>
+  </div>
+
+  <div class="p3-footer-bar"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     PAGE 4 – SINGULARITÉ + CTA
+═══════════════════════════════════ -->
+<div class="page page-4">
+  <div class="p4-pattern"></div>
+  <div class="p4-grid-lines"></div>
+
+  <div class="p4-header">
+    <div class="p4-logo-small">Faire un Pont<span>®</span></div>
+    <div class="p4-page-label">Légitimité & contact</div>
+  </div>
+
+  <div class="p4-body">
+    <div class="p4-left">
+      <div class="p4-eyebrow">Ce qui rend cette approche différente</div>
+      <h2>Une <em>double lecture</em><br>que peu peuvent offrir.</h2>
+
+      <div class="p4-legitimacy">
+        <div class="p4-leg-item">
+          <div class="p4-leg-num">I</div>
+          <div class="p4-leg-text">
+            <strong>Trente ans en environnement financier complexe</strong> — fusions-acquisitions, restructurations, situations de tension. Je sais ce que vivent les dirigeants dans la salle de négociation.
+          </div>
+        </div>
+        <div class="p4-leg-item">
+          <div class="p4-leg-num">II</div>
+          <div class="p4-leg-text">
+            <strong>Formation structurée à l'accompagnement</strong> — coaching certifié HEC, analyse existentielle, approches cognitives et émotionnelles. Une méthode rigoureuse, pas une conversation de soutien.
+          </div>
+        </div>
+        <div class="p4-leg-item">
+          <div class="p4-leg-num">III</div>
+          <div class="p4-leg-text">
+            <strong>Une équipe pluridisciplinaire mobilisable</strong> — experts sport de haut niveau, santé des dirigeants, finance et technologie, psychothérapie — selon la complexité de la situation.
+          </div>
+        </div>
+        <div class="p4-leg-item">
+          <div class="p4-leg-num">IV</div>
+          <div class="p4-leg-text">
+            <strong>Intervention ciblée, confidentielle, orientée résultat</strong> — l'accompagnement s'adapte au niveau de complexité rencontré, pas à une grille préétablie.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p4-right">
+      <div>
+        <div class="p4-gains-title">Ce que le dirigeant gagne</div>
+        <div class="p4-gains">
+          <div class="p4-gain"><strong>Des décisions sécurisées</strong> — moins d'arbitrages défensifs sous pression, plus de clarté dans les moments critiques.</div>
+          <div class="p4-gain"><strong>Moins de panique, plus de stabilité</strong> — une posture de leadership qui tient dans la durée, même face à l'adversité.</div>
+          <div class="p4-gain"><strong>Une gouvernance protégée</strong> — un dirigeant stabilisé communique mieux, décide mieux, tient ses équipes.</div>
+          <div class="p4-gain"><strong>Un espace confidentiel</strong> — pour traiter ce qu'on ne peut pas dire à son board, ses associés, ni son entourage.</div>
+        </div>
+      </div>
+
+      <div class="p4-cta-block">
+        <div class="p4-cta-label">Prochaine étape</div>
+        <div class="p4-cta-main">Un premier entretien,<br>sans engagement.</div>
+        <div class="p4-cta-sub">Confidentiel, centré sur votre situation. Pour voir si l'approche vous correspond.</div>
+      </div>
+
+      <div class="p4-contacts">
+        <div class="p4-contact-name">Eric Guedj</div>
+        <div class="p4-contact-row">
+          <div class="dot"></div>
+          +33 6 24 47 77 77
+        </div>
+        <div class="p4-contact-row">
+          <div class="dot"></div>
+          Eric@faireunpont.fr
+        </div>
+        <div class="p4-contact-row">
+          <div class="dot"></div>
+          17, rue Dupont d'Urville – Paris 16
+        </div>
+        <div class="p4-contact-row">
+          <div class="dot"></div>
+          Bientôt plus de détails sur www.faireunpont.fr
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p4-footer">
+    <div class="p4-footer-quote">
+      «&nbsp;Faire un pont, c'est créer un passage solide quand le terrain devient instable.&nbsp;»
+    </div>
+    <div class="p4-footer-logo">FAIRE UN PONT®</div>
+  </div>
+</div>
+
+</body>
+</html>
